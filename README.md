@@ -52,6 +52,6 @@ The app was built using the following technologies:
 
 ## :memo: Credits
 
-This app was created by [Your Name Here] for a web development course.
+This app was created by @kalashjindal
 
 Feel free to use, modify, and share this app as you see fit. Happy coding!
