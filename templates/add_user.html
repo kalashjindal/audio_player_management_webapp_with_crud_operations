@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Add User</h2>
+{% if message %}
+<div class="alert alert-success" role="alert">{{ message }}</div>
+{% endif %}
+<form id="add-user-form" method="POST">
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
+
+{% block script %}
+<script>
+$(document).ready(function() {
+    $("#add-user-form").submit(function(event) {
+        event.preventDefault(); // prevent default form submission behavior
+        var form_data = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "{{ url_for('add_user') }}",
+            data: form_data,
+            dataType: "json",
+            success: function(response) {
+                alert(response.message);
+                $("#add-user-form")[0].reset();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("Error adding user: " + errorThrown);
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}View Users{% endblock %}
+
+{% block content %}
+  <h1>Users</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in user_list %}
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+          <td>
+            <form method="post" action="{{ url_for('delete_user', user_id=user.id) }}">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

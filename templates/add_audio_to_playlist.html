@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Audio to Playlist{% endblock %}
+
+{% block content %}
+  <h1>Add Audio to Playlist</h1>
+  <h2>{{ playlist.name }}</h2>
+  <form method="post">
+    <div class="form-group">
+      <label for="audio-select">Select Audio:</label>
+      <select class="form-control" id="audio-select" name="audio_id">
+        {% for audio in audio_list %}
+          <option value="{{ audio.id }}">{{ audio.title }} - {{ audio.artist }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Audio</button>
+  </form>
+  <br>
+  <a href="{{ url_for('get_playlist_by_id', playlist_id=playlist.id) }}">Back to {{ playlist.name }} Playlist</a>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}View Audio{% endblock %}
+
+{% block content %}
+  <h1>Audio Files</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Album</th>
+        <th>Genre</th>
+        <th>Length</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for audio in audio_list %}
+        <tr>
+          <td>{{ audio.id }}</td>
+          <td>{{ audio.title }}</td>
+          <td>{{ audio.artist }}</td>
+          <td>{{ audio.album }}</td>
+          <td>{{ audio.genre }}</td>
+          <td>{{ audio.length }}</td>
+          <td>
+            <form action="{{ url_for('delete_audio', id=audio.id) }}" method="POST">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
